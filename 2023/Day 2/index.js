@@ -10,9 +10,17 @@ function part1(input) {
 }
 
 function part2(input) {
-
+    return input
+        .reduce((acc, curr) => 
+            acc + Object.values(curr.split(':')[1].split(/,|;/)
+                .reduce((colors, color) => {
+                    const [num, word] = color.trim().split(' ')
+                    if (colors[word] < parseInt(num)) colors[word] = parseInt(num)
+                    return colors
+                }, { red: 0, green: 0, blue: 0 })).reduce((a, c) => a * c, 1)
+        , 0)
 }
 
 console.log(part1(inputRows)) // 2512
 
-console.log(part2(inputRows))
+console.log(part2(inputRows)) // 67335
